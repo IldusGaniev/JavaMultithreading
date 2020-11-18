@@ -31,6 +31,7 @@ public class Hippodrome {
                 e.printStackTrace();
             }
         }
+
     }
     public void print(){
         for (Horse hors :
@@ -41,6 +42,23 @@ public class Hippodrome {
             System.out.println();
     }
 
+    public Horse getWinner(){
+        double maxDistance = 0;
+        Horse ho = null;
+        for (Horse h :
+                horses) {
+            if (maxDistance < h.distance) {
+                maxDistance = h.distance;
+                ho = h;
+            }
+        }
+        return ho;
+    }
+
+    public void printWinner(){
+        System.out.println("Winner is " + getWinner().name + "!");
+    }
+
     public static Hippodrome game;
 
     public static void main(String[] args){
@@ -49,5 +67,6 @@ public class Hippodrome {
         game.getHorses().add(new Horse("Second", 3, 0));
         game.getHorses().add(new Horse("Fird", 3, 0));
         game.run();
+        game.printWinner();
     }
 }
