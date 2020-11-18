@@ -36,9 +36,12 @@ public class Horse {
     }
 
     public void move(){
-
+        distance += speed * Math.random();
     }
     public void print(){
-
+        int points = (int)distance;
+        String way = ".";
+        String sRepeated = IntStream.range(0, points).mapToObj(i -> way).collect(Collectors.joining(""));
+        System.out.println(sRepeated + name);
     }
 }
