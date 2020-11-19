@@ -4,13 +4,15 @@ package com.javarush.task.task21.task2108;
 Клонирование растений
 */
 
+import java.util.Map;
+
 public class Solution {
     public static void main(String[] args) {
         Tree tree = new Tree("willow", new String[]{"s1", "s2", "s3", "s4"});
         Tree clone = null;
         try {
-            clone = tree.clone();
-        } catch (CloneNotSupportedException e) {
+            clone = (Tree) tree.clone();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -31,9 +33,10 @@ public class Solution {
         public String getName() {
             return name;
         }
+
     }
 
-    public static class Tree extends Plant {
+    public static class Tree extends Plant implements Cloneable{
         private String[] branches;
 
         public Tree(String name, String[] branches) {
@@ -43,6 +46,17 @@ public class Solution {
 
         public String[] getBranches() {
             return branches;
+        }
+
+        @Override
+        public Object clone() {
+            String[] branchesCopy = new String[branches.length];
+            for (int i = 0; i < branches.length; i++) {
+                branchesCopy[i] = branches[i];
+            }
+            Tree result  = new Tree(super.getName(), branchesCopy);
+
+            return result;
         }
     }
 }
